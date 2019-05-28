@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>04</title>
+</head>
+<body>
+	<form>
+		<input type="text" id="k1" name="k1" placeholder="请输入数字"/>
+		<input type="button" id="k2" name="k2" value="左端入" onclick="EnQueue1()" />
+		<input type="button" id="k3" name="k3" value="右端入" onclick="EnQueue2()" />
+		<input type="button" id="k4" name="k4" value="左端出" onclick="DeQueue1()" />
+		<input type="button" id="k5" name="k5" value="右端出" onclick="DeQueue2()" />
+	</form>
+	<table cellspacing="5">
+		<tr id="tr1" bgcolor="red"></tr>
+	</table>
+
+	<script type="text/javascript">
+		var base = [];
+		var front = 0;
+		var rear = 0;
+		function shuchu(){
+			var text1 = document.getElementById("tr1");
+			var text2 ="";
+			for(var i=0;i<base.length;i++)
+			{
+				text2 += "<td>"+base[i]+"</td>";
+			}
+			text1.innerHTML = text2;
+		}
+		function EnQueue1(){
+			var text1 = document.getElementById("k1").value;
+			if(!isNaN(text1) && text1.length>0){
+			   base.unshift(text1);
+			   rear++;
+			   shuchu();
+			}
+			else{alert("请输入数字！");}
+		}
+		function EnQueue2(){
+			var text1 = document.getElementById("k1").value;
+			if(!isNaN(text1) && text1.length>0){
+			   base.push(text1);
+			   rear++;
+			   shuchu();
+			}
+			else{alert("请输入数字！");}
+		}
+		function DeQueue1(){
+			if(rear!=front)
+			{
+			   alert("即将删除："+base[0]);
+			   base.shift();
+			   rear--;
+			   shuchu();
+			}
+		}
+		function DeQueue2(){
+			if(rear!=front)
+			{
+			   alert("即将删除："+base[base.length-1]);
+			   base.pop();
+			   rear--;
+			   shuchu();
+			}
+		}
+		
+		var trr = document.getElementById("tr1");
+		trr.onclick = function(e){ //由于td为动态生成的所以用事件委托：原本是想实现单击单元格<td>触发该事件,现委托给上一级<tr>,原理为冒泡
+   			if(e.target.tagName.toLowerCase()=="td"){ //这里可以不要条件(我加条件单纯为了熟练属性与方法)，可以直接是if(ture)
+        			//trr.removeChild(e.target);//removeChild():表示直接删除节点，但这里我是要删除数组
+				for(var i=0;i<base.length;i++){
+					if(base[i]==e.target.innerHTML){
+						alert("即将删除："+base[i]);
+						base.splice(i,1);
+						break;
+					}
+				}
+				rear--;
+			   	shuchu();
+    			}
+		}
+		
+	</script>
+</body>
+</html>

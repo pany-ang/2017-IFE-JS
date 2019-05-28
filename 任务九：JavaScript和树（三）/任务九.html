@@ -1,0 +1,295 @@
+<html>
+<head>
+	<title>09</title>
+	<style type="text/css">
+		#a1{
+			width:800px;
+			height:150px;
+			border-style:solid;
+			background-color:white;
+		}
+		#a2{
+			width:300px;
+			height:100px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+		#b2{
+			width:300px;
+			height:100px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+		#c2{
+			width:100px;
+			height:100px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+		#a3{
+			width:100px;
+			height:50px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+		#b3{
+			width:50px;
+			height:50px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+		#c3{
+			width:50px;
+			height:50px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+		#d3{
+			width:110px;
+			height:50px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+		#e3{
+			width:110px;
+			height:50px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:20px;
+			background-color:white;
+		}
+	</style>
+</head>	
+<body>
+	<div id="a1">a1
+	   <div id="a2">a2
+	     <div id="a3">a3
+	     </div>
+	     <div id="b3">b3
+	     </div>
+	     <div id="c3">c3
+	     </div>
+	   </div>
+	   <div id="b2">b2
+	     <div id="d3">d3
+	     </div>
+	     <div id="e3">e3
+	     </div>
+	   </div>
+	   <div id="c2">c2
+	   </div>
+	</div>
+
+	<br /><br />
+
+	<form>
+		<input type="button" name="xian" id="xian" value="先序遍历" onclick="shuchu1()" />     <!--注意id和name的名字不能与函数名重名-->
+		<input type="button" name="zhong" id="zhong" value="中序遍历" onclick="shuchu2()" />   <!--注意id和name的名字不能与函数名重名-->
+		<input type="button" name="hou" id="hou" value="后序遍历" onclick="shuchu3()" />       <!--注意id和name的名字不能与函数名重名-->
+		<br /><br />
+		<input type="text" name="ru" id="ru" placeholder="请输入查询内容" />
+		<input type="button" name="cha" id="cha" value="先序精确查询" onclick="chaxun()" />
+		<br /><br />
+		<input type="text" name="tian" id="tian" placeholder="先选元素后输入内容" />
+		<input type="button" name="jia" id="jia" value="添加" onclick="tianjia()" />
+		<br /><br />
+		<input type="button" name="shan" id="shan" value="删除" onclick="shanchu()" />[请先选中某个元素再点击该键]
+	</form>
+
+	<script type="text/javascript">
+
+		var a = [];  //全局变量：用于存储快照
+
+		function xianxu(node)  //先序遍历
+		{
+			if(node!=null)
+			{
+				for(var i=0,j=i;i<node.children.length;i++)
+				{
+					if(j==i) { a.push(node); }  //记录一次根节点快照
+					xianxu(node.children[i]);
+				}
+				if(node.children.length==0)
+				{
+					a.push(node);//记录叶节点快照
+				}
+			}
+		}
+
+		function zhongxu(node) //中序遍历
+		{
+			if(node!=null)
+			{
+				for(var i=0,j=i;i<node.children.length;i++)
+				{
+					zhongxu(node.children[i]);
+					if(j==i) { a.push(node); }  //记录一次根节点快照
+				}
+				if(node.children.length==0)
+				{
+					a.push(node);//记录叶节点快照
+				}
+			}
+		}
+
+		function houxu(node)  //后序遍历
+		{
+			if(node!=null)
+			{
+				for(var i=0,j=i;i<node.children.length;i++)
+				{
+					houxu(node.children[i]);
+					if(i==node.children.length-1) { a.push(node); }  //记录一次根节点快照
+				}
+				if(node.children.length==0)
+				{
+					a.push(node);//记录叶节点快照
+				}
+			}
+		}
+
+		function shuchu1()  //可视化演示先序遍历结果
+		{
+			chushihua1();
+			var a1 = document.getElementById("a1");
+			xianxu(a1);
+			keshihua();
+		}
+		
+		function shuchu2()  //可视化演示中序遍历结果
+		{
+			chushihua1();
+			var a1 = document.getElementById("a1");
+			zhongxu(a1);
+			keshihua();
+		}
+
+		function shuchu3()  //可视化演示后序遍历结果
+		{
+			chushihua1();
+			var a1 = document.getElementById("a1");
+			houxu(a1);
+			keshihua();
+		}
+
+		function chushihua1()  //初始化快照,并使树的各个节点变回白色
+		{
+			for(var i=0;i < a.length;i++)
+			{
+				a[i].setAttribute('style','background-color:white');
+			}
+			a = [];
+		}
+		function chushihua2()   //初始化节点树,使树的各个节点变回白色
+		{
+			var div = document.getElementsByTagName("div");
+			for(var i=0;i < div.length;i++)
+			{
+				div[i].setAttribute('style','background-color:white');
+			}
+		}
+		
+		function keshihua()  //实现可视化
+		{
+			var i=0;
+			var timer = setInterval(function(){     //window对象中的setInterval()方法，用于设置定时器
+				if(i==0)
+				{
+					a[i].setAttribute('style','background-color:red');
+					i++;
+				}
+				else if(i < a.length) 
+				{
+					a[i-1].setAttribute('style','background-color:white');
+					a[i].setAttribute('style','background-color:red');
+					i++;
+        			}
+				else 
+				{
+					a[i-1].setAttribute('style','background-color:white');
+                			clearInterval(timer);    //window对象中的clearInterval()方法，用于取消定时器
+				}
+			},500);
+		}
+
+		function chaxun()
+		{
+			chushihua1();
+			var a1 = document.getElementById("a1");
+			xianxu(a1);
+			var text = document.getElementById("ru").value;
+
+			var i=0;
+			var timer = setInterval(function(){      //window对象中的setInterval()方法，用于设置定时器
+				if(i==0)
+				{
+					a[i].setAttribute('style','background-color:red');
+					i++;
+				}
+				else if(a[i-1].childNodes[0].nodeValue.search(text)!=-1)  //如果遍历过相应的内容则停止(为什么用==text不行？)
+				{                                                         //为什么a[i-1].childNodes[0].nodeValue==text不行？
+					if(a[i-1].childNodes[0].nodeValue==text){alert("验证");}//该语句根本没有执行
+					alert("找到："+a[i-1].childNodes[0].nodeValue);
+					clearInterval(timer);    //window对象中的clearInterval()方法，用于取消定时器
+				}
+				else if(i < a.length) 
+				{
+					a[i-1].setAttribute('style','background-color:white');
+					a[i].setAttribute('style','background-color:red');
+					i++;
+        			}
+				else 
+				{
+					a[i-1].setAttribute('style','background-color:white');
+                			clearInterval(timer);    //window对象中的clearInterval()方法，用于取消定时器
+					alert("没有找到指定的内容！");
+				}
+			},500);
+		}
+
+		var k;  //存储被选中的元素
+		var a1 = document.getElementById("a1");  //事件的委托。该函数实现了点击选中某元素这个功能
+		a1.onclick = function(e){
+   			if(e.target.tagName.toLowerCase()=="div"){  //这里可以不要条件(我加条件单纯为了熟练属性与方法)，可以直接是if(ture)
+				chushihua2();
+				e.target.setAttribute('style','background-color:blue');
+				k = e.target;
+    			}
+		}
+		function shanchu()
+		{
+			k.parentNode.removeChild(k);  //属性parentNode:返回父节点；方法removeChild()：删除子节点
+		}
+		function tianjia()
+		{
+			var text = document.getElementById("tian").value;
+			var div = document.createElement("div");  //创建一个div节点。createElement():创建一个元素节点
+			div.innerHTML = text;
+			k.appendChild(div);  //向节点的子节点末尾添加节点
+		}
+
+	</script>
+</body>
+</html>

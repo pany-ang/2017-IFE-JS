@@ -1,0 +1,304 @@
+<html>
+<head>
+	<title>07</title>
+	<style type="text/css">
+		#a1,#aa1{
+			width:600px;
+			height:200px;
+			border-style:solid;
+			background-color:white;
+		}
+		#a2,#aa2{
+			width:280px;
+			height:150px;
+			border-style:solid;
+			float:left;
+			margin-top:22px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#b2,#bb2{
+			width:280px;
+			height:150px;
+			border-style:solid;
+			float:left;
+			margin-top:22px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#a3,#aa3{
+			width:120px;
+			height:100px;
+			border-style:solid;
+			float:left;
+			margin-top:22px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#b3,#bb3{
+			width:120px;
+			height:100px;
+			border-style:solid;
+			float:left;
+			margin-top:22px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#c3,#cc3{
+			width:120px;
+			height:100px;
+			border-style:solid;
+			float:left;
+			margin-top:22px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#d3,#dd3{
+			width:120px;
+			height:100px;
+			border-style:solid;
+			float:left;
+			margin-top:22px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#a4,#aa4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#b4,#bb4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#c4,#cc4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#d4,#dd4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#e4,#ee4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#f4,#ff4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#g4,#gg4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+		#h4,#hh4{
+			width:40px;
+			height:60px;
+			border-style:solid;
+			float:left;
+			margin-top:20px;
+			margin-left:10px;
+			background-color:white;
+		}
+	</style>
+</head>	
+<body>
+	<div id="a1">
+	   <div id="a2">
+	     <div id="a3">
+	       <div id="a4">
+	       </div>
+	       <div id="b4">
+	       </div>
+	     </div>
+	     <div id="b3">
+	       <div id="c4">
+	       </div>
+	       <div id="d4">
+	       </div>
+	     </div>
+	   </div>
+	   <div id="b2">
+	     <div id="c3">
+	       <div id="e4">
+	       </div>
+	       <div id="f4">
+	       </div>
+	     </div>
+	     <div id="d3">
+	       <div id="g4">
+	       </div>
+	       <div id="h4">
+	       </div>
+	     </div>
+	   </div>
+	</div>
+
+	<br /><br />
+
+	<div id="aa1">
+	   <div id="aa2">
+	     <div id="aa3">
+	       <div id="aa4">
+	       </div>
+	       <div id="bb4">
+	       </div>
+	     </div>
+	     <div id="bb3">
+	       <div id="cc4">
+	       </div>
+	       <div id="dd4">
+	       </div>
+	     </div>
+	   </div>
+	   <div id="bb2">
+	     <div id="cc3">
+	       <div id="ee4">
+	       </div>
+	       <div id="ff4">
+	       </div>
+	     </div>
+	     <div id="dd3">
+	       <div id="gg4">
+	       </div>
+	       <div id="hh4">
+	       </div>
+	     </div>
+	   </div>
+	</div>
+
+	<br /><br />
+
+	<form>
+		<input type="button" name="xian" id="xian" value="先序遍历" onclick="shuchu1()" />     <!--注意id和name的名字不能与函数名重名-->
+		<input type="button" name="zhong" id="zhong" value="中序遍历" onclick="shuchu2()" />   <!--注意id和name的名字不能与函数名重名-->
+		<input type="button" name="hou" id="hou" value="后序遍历" onclick="shuchu3()" />       <!--注意id和name的名字不能与函数名重名-->
+	</form>
+
+	<script type="text/javascript">
+
+		var a = [];  //全局变量：用于存储快照
+
+		function xianxu(node)  //先序遍历
+		{
+			if(node!=null)
+			{
+				a.push(node);//记录快照
+				xianxu(node.firstElementChild);
+				xianxu(node.lastElementChild);
+			}
+		}
+
+		function zhongxu(node) //中序遍历
+		{
+			if(node!=null)
+			{
+				zhongxu(node.firstElementChild);
+				a.push(node);//记录快照
+				zhongxu(node.lastElementChild);
+			}
+		}
+
+		function houxu(node)  //后序遍历
+		{
+			if(node!=null)
+			{
+				houxu(node.firstElementChild);
+				houxu(node.lastElementChild);
+				a.push(node);//记录快照
+			}
+		}
+
+		function shuchu1()  //可视化演示先序遍历结果
+		{
+			chushihua();
+			var a1 = document.getElementById("a1");
+			xianxu(a1);
+			keshihua();
+		}
+		
+		function shuchu2()  //可视化演示中序遍历结果
+		{
+			chushihua();
+			var a1 = document.getElementById("a1");
+			zhongxu(a1);
+			keshihua();
+		}
+
+		function shuchu3()  //可视化演示后序遍历结果
+		{
+			chushihua();
+			var a1 = document.getElementById("a1");
+			houxu(a1);
+			keshihua();
+		}
+
+		function chushihua()  //初始化树：使树的各个节点变回白色
+		{
+			for(var i=0;i < a.length;i++)
+			{
+				a[i].setAttribute('style','background-color:white');
+			}
+			a = [];
+		}
+		
+		function keshihua()  //实现可视化
+		{
+			var i=0;
+			var timer = setInterval(function(){     //window对象中的setInterval()方法，用于设置定时器
+				if(i==0)
+				{
+					a[i].setAttribute('style','background-color:red');
+					i++;
+				}
+				else if(i < a.length) 
+				{
+					a[i-1].setAttribute('style','background-color:white');
+					a[i].setAttribute('style','background-color:red');
+					i++;
+        			}
+				else 
+				{
+					a[i-1].setAttribute('style','background-color:white');
+                			clearInterval(timer);   //window对象中的clearInterval()方法，用于取消定时器
+				}
+			},500);
+		}
+
+	</script>
+</body>
+</html>

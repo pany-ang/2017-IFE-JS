@@ -1,0 +1,29 @@
+<html>
+<head>
+	<meta />
+	<title>k</title>
+</head>
+<body>
+	<script type="text/javascript">
+		while(true)
+		{
+			var money = prompt("请输入您的余额：");
+			//var money = "0";
+			if(isNaN(money))
+			{
+				alert("数据不合法，请重新输入！");
+				continue;
+			}
+			if(money<0) alert("余额不足！");
+			else alert("余额足够！");
+			
+			var isAgain = confirm("是否继续计算？");
+			if(isAgain==false)
+			{
+				alert("程序结束。");
+				break;
+			}
+		}
+	</script>
+</body>
+</html>

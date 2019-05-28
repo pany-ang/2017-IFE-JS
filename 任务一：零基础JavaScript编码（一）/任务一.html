@@ -1,0 +1,27 @@
+<html>
+ 	<head>
+		<title>IFE JavaScript Task 01</title>
+	</head>
+<body>
+	<form>
+	请输入万州今天天气情况：<input id="aqi-input" type="text">
+	<input type="button" id="button" value="确认填写" />
+	</form>
+
+	您输入的值是：<span id="aqi-display">尚无录入</span>
+
+	<script type="text/javascript">
+
+	(function() {
+		var a = document.getElementById("button");
+		var b = document.getElementById("aqi-input");
+		var c = document.getElementById("aqi-display");
+  		a.onclick = function(){
+			c.innerHTML=b.value;                           //innerHTML:设置或返回该标签内的HTML
+  		}
+	})();
+
+	</script>
+
+</body>
+</html>
